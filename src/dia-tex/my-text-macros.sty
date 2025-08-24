@@ -1,0 +1,138 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{my-macros-text}[%
+    2018/01/01 v0.0-dev Custom text-related user macros.%
+]
+
+% ---
+
+% In the following, the dummy argument {} will be required
+% for correct spacing ... furthermore, this asserts
+% correct endmark placing for `ntheorem` (think of `\dots`!)
+
+% Auxiliary macro for the interletter space
+\newcommand*{\spatium}{\kern 0.1 em \relax}
+
+% Shortcuts for simple shortcuts without dots in its interior
+\newcommand*{\bzw}[1]{bzw.}
+\newcommand*{\usw}[1]{usw.}
+\newcommand*{\vs}[1]{vs.}
+\newcommand*{\viz}[1]{viz.}
+
+% Shortcuts for shortcuts with dots in its interior
+\newcommand*{\aka}[1]{a.{\spatium}k.{\spatium}a.}
+\newcommand*{\eg}[1]{e.{\spatium}g.}
+\newcommand*{\ie}[1]{i.{\spatium}e.}
+\newcommand*{\loccit}[1]{loc.{\spatium}cit.}
+\newcommand*{\NN}[1]{N.{\spatium}N.}
+\newcommand*{\opcit}[1]{op.{\spatium}cit.}
+\newcommand*{\PS}[1]{p.{\spatium}s.}
+\newcommand*{\RIP}[1]{R.{\spatium}I.{\spatium}P.}
+\newcommand*{\wrt}[1]{w.{\spatium}r.{\spatium}t.}
+
+\let\olddh=\dh%
+\def\dh#1{d.{\spatium}h.}
+% The macro \dh is already defined by fontenc with T1 option.
+
+\newcommand*{\iA}[1]{i.{\spatium}A.}
+\newcommand*{\iV}[1]{i.{\spatium}V.}
+\newcommand*{\maW}[1]{m.{\spatium}a.{\spatium}W}
+\newcommand*{\oae}[1]{o.{\spatium}ä.}
+\newcommand*{\ua}[1]{u.{\spatium}a.}
+\newcommand*{\zB}[1]{z.{\spatium}B.}
+
+% Academic Titles
+\newcommand*{\BSc}[1]{B.{\spatium}Sc.}
+\newcommand*{\MSc}[1]{M.{\spatium}Sc.}
+\newcommand*{\ProfDr}[1]{Prof.{\spatium}Dr.}
+
+% ---
+
+% Shortcuts for textual delimiters
+
+% Chevrons require `fontenc` with T1 option!
+\RequirePackage[T1]{fontenc}
+
+\newcommand*{\quoting}[1]{\guillemotright#1\guillemotleft}
+\newcommand*{\colloquial}[1]{\guillemotright#1\guillemotleft}
+\newcommand*{\gravename}[1]{{\normalfont\scshape#1}}
+\newcommand*{\overstating}[1]{\guillemotright#1\guillemotleft}
+
+% ---
+
+% Amounts of money
+
+\RequirePackage{numprint}
+\nprounddigits{2}
+
+\newcommand*{\EURO}[1]{\numprint{#1}~{\scshape\lowercase{EUR}}}
+\newcommand*{\DOLLAR}[1]{\numprint{#1}\,DOL}
+
+% ---
+
+% Date-related
+
+\RequirePackage{datetime2}
+
+\newcommand*{\dateprint}[3]{%
+    \DTMdisplaydate{#1}{#2}{#3}{-1}%
+}
+
+\newcommand*{\born}[3]{%
+    *\dateprint{#1}{#2}{#3}%
+}
+
+% ---
+
+% Index-related macros
+% Someday, this has to belong to my-mods-index...
+
+%\newcommand*{\Index}[1]{\index{}}
+
+\newcommand*{\definiendum}[2][]{%
+    {\color{mainaccentcolor}#2}%
+    \ifx\relax#1\relax%
+        \index{#2}%
+    \else%
+        \index{#1}
+    \fi%
+}
+
+% In philosophical logic, the following terms are in use:
+% Definiendum: Term to be defined.
+% Definiens: Set of defining properties.
+
+% ---
+
+% Debugging tasks
+
+\newcommand{\PrintCMD}[1]{%
+    \expandafter\meaning\csname#1\endcsname
+}
+
+% ---
+
+% Centers text horizontally and vertically on a page
+% (useful on titlepages)
+\newenvironment{hvcenter}{%
+    \begin{center}%
+        \topskip0pt%
+        \vspace*{\fill}%
+        }{
+        \vspace*{\fill}%
+    \end{center}
+}
+
+% ---
+
+% A command for sectionbreaks, originally found at:
+% [Asterism and similar breaking / non-breaking options](https://tex.stackexchange.com/questions/160336)
+% But see also:
+% [The correct way to perform a section break in LaTeX](https://tex.stackexchange.com/questions/403325)
+\newcommand{\sectionbreak}{
+    \bgroup% grouping is necessary for `\centering`
+    \par\bigskip%
+    \centering\color{mainaccentcolor}\ensuremath{\square}%
+    \par \bigskip%
+    \egroup
+}

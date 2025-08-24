@@ -1,0 +1,374 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{my-macros-math}[%
+    2018/01/01 v0.0-dev Custom math-related user macros.%
+]
+
+% ---
+
+% Make sure that all symbols are defined (other combinations of packages would be possible...).
+
+% mathtools - Mathematical tools to use with amsmath.
+\RequirePackage{mathtools}
+
+% fouriernc - Use New Century Schoolbook text with Fourier maths fonts.
+\RequirePackage{fouriernc}
+
+% % Assert =amsmath < mathalfa=, compare with:
+% % mathalfa - General package for loading maths alphabets in LaTeX.
+% \RequirePackage[%
+%     % =\mathfrak= alphabet.
+%     frak = euler,%
+%     frakscaled = .9,%
+%     % =\mathbb= alphabet.
+%     bb = ams,%
+%     % =\mathcal= alphabet.
+%     cal = euler,%
+%     % =\mathscr= alphabet.
+%     scr = rsfso,%
+% ]{mathalfa}
+
+% amssymb - ???
+\RequirePackage{amssymb}
+
+% ---
+
+% An auxiliary macro for printing one symbol on top
+% of another in every situation.
+% The finetuning parameters have to be chosen
+% individually for the concretely selected font
+% (in this file, for symbols defined with this macro,
+% the parameters are chosen to look fine with
+% New Century Schoolbook)
+% The solution with `\ooalign` is taken from:
+% [\subseteq + \circ as a single symbol ("open subset")](https://tex.stackexchange.com/questions/22371)
+
+\newcommand*{\one@other}[7]{{\mathchoice%
+            % #1 = first symbol, #2 second symbol, #3 = horizontal correction parameter [in mu]
+            % #4, #5, #6, #7  = vertical correction parameter [in ex] in display, text, script, scriptscript mode, respectively
+            % #8 = could be mathcharacter, i.e. mathord, mathrel, ...
+            {\mathalpha{\ooalign{%
+                        $\displaystyle#1$\cr%
+                        \hidewidth\raise#4ex\hbox{$\displaystyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\textstyle#1$\cr%
+                        \hidewidth\raise#5ex\hbox{$\textstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptstyle#1$\cr%
+                        \hidewidth\raise#6ex\hbox{$\scriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptscriptstyle#1$\cr%
+                        \hidewidth\raise#7ex\hbox{$\scriptscriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+        }}
+
+% ---
+
+% VarGreek characters
+\newcommand*{\epsilonn}{\varepsilon}
+\newcommand*{\otherepsilonn}{\othervarepsilon}
+\newcommand*{\phii}{\varphi}
+\newcommand*{\otherphii}{\othervarphi}
+\newcommand*{\thetaa}{\vartheta}
+\newcommand*{\otherthetaa}{\othervartheta}
+
+% The commands with "other"-prefix are provided by fouriernc, for example.
+
+% Mnemoic: Prefix "other" tags the more rarely used version:
+% For the lower-case ones, "other" gives the upright version,
+% for upper-case ones, "other" gives the slanted version, respectively.
+
+% Landau's (O|o) should be an Omicron!
+\newcommand*{\Omicron}{{\mathcal O}}
+\newcommand*{\omicron}{{{%
+                    \mathchoice
+                    {{\scriptstyle\mathcal{O}}}% \displaystyle
+                    {{\scriptstyle\mathcal{O}}}% \textstyle
+                    {{\scriptscriptstyle\mathcal{O}}}% \scriptstyle
+                    {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}} % \scriptscriptstyle
+                }}}
+
+% Mathematical typefaces
+\newcommand*{\mb}{\mathbb}
+\providecommand{\bm}{\mathbf}% Usually, the bm package is loaded
+\newcommand*{\mc}{\mathcal}
+\newcommand*{\mf}{\mathfrak}
+\newcommand*{\mr}{\mathrm}
+\newcommand*{\msc}{\mathscr}
+
+% Mathematical arrows
+\newcommand*{\ra}{\rightarrow}
+\newcommand*{\la}{\leftarrow}
+\newcommand*{\Ra}{\Rightarrow}
+\newcommand*{\La}{\Leftarrow}
+\newcommand*{\Lra}{\Longrightarrow}
+\newcommand*{\Lla}{\Longleftarrow}
+\newcommand*{\hra}{\hookrightarrow}
+\newcommand*{\xra}{\xrightarrow}
+
+% Unary Mathematical embracements
+\DeclarePairedDelimiter{\abrackets}{\langle}{\rangle}
+\DeclarePairedDelimiter{\cbrackets}{\{}{\}}
+\DeclarePairedDelimiter{\rbrackets}{(}{)}
+\DeclarePairedDelimiter{\sbrackets}{[}{]}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\bra}{\langle}{|}
+\DeclarePairedDelimiter{\ket}{|}{\rangle}
+
+% Binary mathematical embracements
+\newcommand*{\comprehension@separator}{\,:\,}
+\DeclarePairedDelimiterX{\family}[2]{(}{)}{\,#1\comprehension@separator#2\,}
+\DeclarePairedDelimiterX{\set}[2]{\{}{\}}{\,#1\comprehension@separator#2\,}
+\DeclarePairedDelimiterX{\conditional}[2]{(}{)}{\,#1\vert#2\,}
+\DeclarePairedDelimiterX{\braket}[2]{\langle}{\rangle}{{#1 \delimsize | \mathopen{}#2}}
+\DeclarePairedDelimiterX{\ketbra}[2]{|}{|}{{#1 \delimsize {\rangle \langle} \mathopen{}#2}}
+\DeclarePairedDelimiterX{\dual}[2]{\langle}{\rangle}{#1, #2}
+\DeclarePairedDelimiterX{\intint}[2]{\llbracket}{\rrbracket}{#1, #2}
+\DeclarePairedDelimiterX{\intcc}[2]{[}{]}{#1, #2}
+\DeclarePairedDelimiterX{\intco}[2]{[}{)}{#1, #2}
+\DeclarePairedDelimiterX{\intoc}[2]{(}{]}{#1, #2}
+\DeclarePairedDelimiterX{\intoo}[2]{(}{)}{#1, #2}
+\DeclarePairedDelimiterX{\convcc}[2]{[}{]}{#1; #2}
+\DeclarePairedDelimiterX{\convco}[2]{[}{)}{#1; #2}
+\DeclarePairedDelimiterX{\convoc}[2]{[}{)}{#1; #2}
+\DeclarePairedDelimiterX{\convoo}[2]{(}{)}{#1; #2}
+
+% Marginal Reason
+\DeclarePairedDelimiter{\AlignMarginalReasonDelimiter}{|}{.}
+\newcommand*{\AlignMarginalReason}[1]{\AlignMarginalReasonDelimiter[\big]{\text{\space#1}}}
+
+% Blackboard symbols
+\newcommand*{\IA}{{\mathbb A}}
+\newcommand*{\IB}{{\mathbb B}}
+\newcommand*{\IC}{{\mathbb C}}
+\newcommand*{\ID}{{\mathbb D}}
+\newcommand*{\IE}{{\mathbb E}}
+\newcommand*{\IF}{{\mathbb F}}
+\newcommand*{\IH}{{\mathbb H}}
+\newcommand*{\II}{{\mathbb I}}
+% \newcommand*{\IJ}{{\mathbb J}}
+\newcommand*{\IK}{{\mathbb K}}
+\newcommand*{\IM}{{\mathbb M}}
+\newcommand*{\IN}{{\mathbb N}}
+\newcommand*{\IP}{{\mathbb P}}
+\newcommand*{\IQ}{{\mathbb Q}}
+\newcommand*{\IR}{{\mathbb R}}
+\newcommand*{\IS}{{\mathbb S}}
+\newcommand*{\IT}{{\mathbb T}}
+\newcommand*{\IV}{{\mathbb V}}
+\newcommand*{\IX}{{\mathbb X}}
+\newcommand*{\IZ}{{\mathbb Z}}
+
+% ENIGMA: Purpose of these macros?
+\newcommand*{\Initial}{\mathbb A}
+\newcommand*{\Final}{\mathbb O}
+
+% Basic diacritica
+\newcommand*{\ol}{\overline}
+\newcommand*{\ti}{\tilde}
+\newcommand*{\ul}{\underline}
+\newcommand*{\wh}{\widehat}
+\newcommand*{\wt}{\widetilde}
+
+% cdot-indicated arguments
+\newcommand*{\ArgRaw}[1]{{\,\cdot_{#1}\,}}
+\newcommand*{\Arg}{\ArgRaw{}}
+\newcommand*{\ArgOne}{\ArgRaw{1}}
+\newcommand*{\ArgTwo}{\ArgRaw{2}}
+\newcommand*{\ArgThree}{\ArgRaw{3}}
+
+% Miscellaneous symbols with no arguments
+\newcommand*{\bsl}{\backslash}
+\newcommand*{\Ell}{\mathrm L}
+\newcommand*{\de}{{\, \mathrm d}}
+\newcommand*{\debar}{{\,\one@other{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
+\newcommand*{\dirac}{\otherdelta}
+\newcommand*{\im}{\imath}
+\newcommand*{\jm}{\jmath}
+\newcommand*{\id}{{\mathrm{id}}}
+\newcommand*{\MSE}{\mathbb {MSE}}
+\newcommand*{\n}{\circ}
+\newcommand*{\One}{{\mathbb 1}}
+\newcommand*{\pn}{\vartriangleright}
+\newcommand*{\psn}{\blacktriangleright}
+\newcommand*{\pssn}{{\one@other{\vartriangleright}{\cdot}{3.5}{0}{0}{0}{0}}}
+\newcommand*{\sn}{\bullet}
+\newcommand*{\ssn}{{\one@other{\circ}{\cdot}{0}{0}{0}{0}{0}}}
+\newcommand*{\subs}{\subseteq}
+\newcommand*{\sups}{\supseteq}
+\newcommand*{\starset}{\{ \star \}}
+\newcommand*{\tleq}{\trianglelefteqslant}
+% `\one@other` can be founde at the end of the file
+
+% Miscellaneous symbols with mandatory arguments
+\newcommand*{\wo}[1]{\backslash \{#1\}}
+\newcommand*{\diff}[1]{\frac{\mr d}{\mr d #1}}
+\newcommand*{\del}[2]{\frac{\partial #1} {\partial #2}}
+\newcommand*{\grkone}[2]{\mathfrak t_{#1, #2}}
+\newcommand*{\prkone}[1]{\mathfrak t_{#1}}
+\newcommand*{\tens}[2]{#1 \otimes \cdots \otimes #2}
+
+% Quantifiers
+\newcommand*{\FA}[2][]{\ifx \relax#1\relax \forall \, #2. \ \else \forall_{#1} \, #2 \colon \ \fi}
+\newcommand*{\EX}[2][]{\ifx \relax#1\relax \exists \, #2. \ \else \exists_{#1} \, #2 \colon \ \fi}
+\newcommand*{\EXone}[2][]{\ifx \relax#1\relax \exists{!} \, #2. \ \else \exists{!}_{#1} \, #2 \colon \ \fi}
+
+% Named operators
+\newcommand*{\Aut}{\operatorname{Aut}}
+\newcommand*{\abco}{\operatorname{absconv}}
+\newcommand*{\aff}{\operatorname{aff}}
+\newcommand*{\acc}{\operatorname{acc}}
+\newcommand*{\bin}{\operatorname{bin}}
+\newcommand*{\bij}{{\operatorname{bij}}}
+\newcommand*{\cl}{\operatorname{cl}}
+\newcommand*{\cod}{\operatorname{cod}}
+\newcommand*{\codim}{\operatorname{codim}}
+\newcommand*{\coker}{\operatorname{coker}}
+\newcommand*{\colim}{\operatorname{colim}}
+\newcommand*{\cone}{\operatorname{cone}}
+\newcommand*{\Cone}{\operatorname{Cone}}
+\newcommand*{\conv}{\operatorname{conv}}
+\newcommand*{\dist}{\operatorname{dist}}
+\newcommand*{\dom}{\operatorname{dom}}
+\newcommand*{\diag}{\operatorname{diag}}
+\newcommand*{\diam}{\operatorname{diam}}
+\newcommand*{\ev}{\operatorname{ev}}
+\newcommand*{\ext}{\operatorname{ext}}
+\newcommand*{\End}{\operatorname{End}}
+\newcommand*{\fib}{\operatorname{fib}}
+\newcommand*{\Fix}{\operatorname{Fix}}
+\newcommand*{\graph}{\operatorname{graph}}
+\renewcommand*{\Im}{\operatorname{Im}}
+\newcommand*{\ind}{{\operatorname{ind}}}
+\newcommand*{\inj}{{\operatorname{inj}}}
+\newcommand*{\inter}{\operatorname{int}}
+\newcommand*{\lin}{\operatorname{lin}}
+\newcommand*{\Lan}{\operatorname{Lan}}
+\newcommand*{\Log}{\operatorname{Log}}
+\newcommand*{\Mor}{\operatorname{Mor}}
+\newcommand*{\Nat}{\operatorname{Nat}}
+\newcommand*{\Ob}{\operatorname{Ob}}
+\newcommand*{\olconv}{\operatorname{\overline{conv}}}
+\newcommand*{\oldom}{\operatorname{\overline{dom}}}
+\newcommand*{\olext}{\operatorname{\overline{ext}}}
+\newcommand*{\ollin}{\operatorname{\overline{lin}}}
+\newcommand*{\olran}{\operatorname{\overline{ran}}}
+\newcommand*{\opp}{{\operatorname{op}}}
+\newcommand*{\Pot}{\operatorname{Pot}}
+\newcommand*{\ran}{\operatorname{ran}}
+\newcommand*{\Ran}{\operatorname{Ran}}
+\renewcommand*{\Re}{\operatorname{Re}}
+\newcommand*{\rej}{\operatorname{rej}}
+\newcommand*{\rk}{\operatorname{rk}}
+\newcommand*{\sign}{\operatorname{sign}}
+\newcommand*{\sinc}{\operatorname{sinc}}
+\newcommand*{\sou}{\operatorname{sou}}
+\newcommand*{\spec}{\operatorname{spec}}
+\newcommand*{\supp}{\operatorname{supp}}
+\newcommand*{\sur}{{\operatorname{sur}}}
+\newcommand*{\tar}{\operatorname{tar}}
+\newcommand*{\tr}{\operatorname{tr}}
+\newcommand*{\VaR}{\operatorname{VaR}}
+\newcommand*{\posteq}[2]{\operatorname{posteq} (#1, #2)}
+\newcommand*{\preeq}[2]{\operatorname{eq} (#1, #2)}
+
+% Should be avoided.
+\newcommand*{\op}[1]{\operatorname{#1}}
+
+% Math Operators
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\prolim}{pro\,lim}
+\DeclareMathOperator*{\indlim}{ind\,lim}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+
+% Categories
+\newcommand*{\categoryname}[1]{\text{\normalfont\bfseries#1}}
+\newcommand*{\Ab}{\categoryname{Ab}}
+\newcommand*{\Alg}[1][\tau]{\categoryname{Alg}(#1)}
+\newcommand*{\Ban}[1][\IK]{\categoryname{Ban}_{#1}}
+\newcommand*{\BanOne}{\categoryname{Ban}_1}
+\newcommand*{\Cat}{\categoryname{Cat}}
+\newcommand*{\CMon}{\categoryname{CMon}}
+\newcommand*{\Et}{\categoryname{Ét}}
+\newcommand*{\fin}{\text{\normalfont fin}}
+\newcommand*{\Grp}{\categoryname{Grp}}
+\newcommand*{\Set}{\categoryname{Set}}
+\newcommand*{\Kusp}{\categoryname{KuSp}}
+\newcommand*{\LCS}{\categoryname{LCS}}
+\newcommand*{\Man}[1][\infty]{\categoryname{Man}_{#1}}
+\newcommand*{\Mat}[1][\IK]{\categoryname{Mat}_{#1}}
+\newcommand*{\Meas}{\categoryname{Meas}}
+\newcommand*{\Met}{\categoryname{Met}}
+\newcommand*{\Mod}[1][R]{\categoryname{Mod}_{#1}}
+\newcommand*{\Mon}{\categoryname{Mon}}
+\newcommand*{\MSet}[1][M]{{}_{#1}{\categoryname{Set}}}
+\newcommand*{\Op}{\categoryname{Op}}
+\newcommand*{\CRing}{\categoryname{CRing}}
+\newcommand*{\Ring}{\categoryname{Ring}}
+\newcommand*{\PSh}{\categoryname{PSh}}
+\newcommand*{\Sh}{\categoryname{Sh}}
+\newcommand*{\Top}{\categoryname{Top}}
+\newcommand*{\TopMet}{\categoryname{TopMet}}
+\newcommand*{\Haus}{\categoryname{Haus}}
+\newcommand*{\Vek}[1][\IK]{\categoryname{Vec}_{#1}}
+
+% Frequently used phrases in equations
+\newcommand*{\ForAll}{\qquad \text{for all }}
+\newcommand*{\ForAlmAll}{\qquad \text{for almost all }}
+\newcommand*{\ForAlmAny}{\qquad \text{for almost any }}
+\newcommand*{\ForAlmEvery}{\qquad \text{for almost every }}
+\newcommand*{\ForAny}{\qquad \text{for any }}
+\newcommand*{\ForEach}{\qquad \text{for each }}
+\newcommand*{\ForEvery}{\qquad \text{for every }}
+\newcommand*{\FuerAlle}{\qquad \text{für alle }}
+\newcommand*{\FuerJedes}{\qquad \text{für jedes }}
+\newcommand*{\FuerFastAlle}{\qquad \text{für fast alle }}
+\newcommand*{\FuerFastJedes}{\qquad \text{für fast jedes }}
+
+% In the following, the usage `\vcentcolon`
+% from `mathtools` is inspired by:
+% [Symbol for "defined to be logically equivalent" (:⇔)](https://tex.stackexchange.com/questions/198346)
+\newcommand*{\defeq}{\vcentcolon =}
+\newcommand*{\dcolon}{{::}}
+\newcommand*{\eqdef}{= \vcentcolon}
+\newcommand*{\defiff}{\vcentcolon \Longleftrightarrow}
+\newcommand*{\defIff}{\quad \defiff \quad}
+\newcommand*{\Iff}{\quad \iff \quad}
+\renewcommand*{\implies}{\Rightarrow}
+\newcommand*{\Implies}{\quad \Longrightarrow \quad}
+
+\newcommand*{\LinR}{\ensuremath{[\subseteq]}}
+\newcommand*{\RinL}{\ensuremath{[\supseteq]}}
+\newcommand*{\LtoR}{\ensuremath{[\Rightarrow]}}
+\newcommand*{\RtoL}{\ensuremath{[\Leftarrow]}}
+
+% An even more beautiful quotient!
+% Originally inspired by:
+% [A symbol for the quotient of two objects](https://tex.stackexchange.com/questions/4624)
+\newcommand*{\quot}[2]{\mathchoice%
+    {\left.\raisebox{.2em}{\ensuremath{#1}}\middle/\raisebox{-.2em}{\ensuremath{#2}}\right.}%
+    {#1 / #2}
+    {#1 / #2}
+    {#1 / #2}
+}
+
+% Macros for terms involving mathematical symbols
+\newcommand*{\as}[1]{a.{\kern0.1em}s.}
+\newcommand*{\fue}[1]{f.{\kern0.1em}ü.}
+\newcommand*{\io}[1]{i.{\kern0.1em}o.}
+
+\newcommand*{\textsigma}{\ensuremath{\othersigma}}
+\def\textstar{\ensuremath{{}^*}}
+\newcommand*{\Cstar}[1]{\ensuremath{\mathrm C^*}}
+\newcommand*{\weakstar}[1]{weak\ensuremath{{}^\star}}
+\newcommand*{\schwachstern}[1]{schwach\ensuremath{{}^\star}}
+
+% ---
