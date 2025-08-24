@@ -1,0 +1,11 @@
+[gitignore]
+sources = ["base.ignore"]
+target = ".gitignore"
+
+[license]
+sources = ["mit.txt"]
+target = "license.txt"
+
+[makefile]
+sources = ["latex-package.mk"]
+target = "makefile"
