@@ -83,8 +83,10 @@
 
 % ---
 
-% Index-related macros
-% Someday, this has to belong to my-mods-index...
+% NOTE The remaining macros should be included in classes or made obsolete
+
+% ---
+
 
 %\newcommand*{\Index}[1]{\index{}}
 
@@ -97,41 +99,6 @@
     \fi%
 }
 
-% In philosophical logic, the following terms are in use:
-% Definiendum: Term to be defined.
-% Definiens: Set of defining properties.
+
 
 % ---
-
-% Debugging tasks
-
-\newcommand{\PrintCMD}[1]{%
-    \expandafter\meaning\csname#1\endcsname
-}
-
-% ---
-
-% Centers text horizontally and vertically on a page
-% (useful on titlepages)
-\newenvironment{hvcenter}{%
-    \begin{center}%
-        \topskip0pt%
-        \vspace*{\fill}%
-        }{
-        \vspace*{\fill}%
-    \end{center}
-}
-
-% ---
-
-% A command for sectionbreaks, originally found at:
-% [Asterism and similar breaking / non-breaking options](https://tex.stackexchange.com/questions/160336)
-% But see also:
-% [The correct way to perform a section break in LaTeX](https://tex.stackexchange.com/questions/403325)
-\newcommand{\sectionbreak}{
-    \bgroup% grouping is necessary for `\centering`
-    \par\bigskip%
-    \centering\color{mainaccentcolor}\ensuremath{\square}%
-    \par \bigskip%
-    \egroup
-}

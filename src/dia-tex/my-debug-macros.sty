@@ -1,0 +1,40 @@
+\NeedsTeXFormat{LaTeX2e}
+
+\ProvidesPackage{my-text-macros}[%
+    2025/08/25 v0.0-dev My debug-related user-level macros.%
+]
+
+% ---
+
+% kantlipsum – Generate sentences in Kant's style.
+\RequirePackage{kantlipsum}
+
+% Displays contents of a token list or macro.
+\newcommand{\DisplayCont}[1]{%
+\typeout{=== \string#1 = [\meaning#1]}%
+}
+
+% Prints macro definition in the document.
+\newcommand{\PrintDef}[1]{%
+    \texttt{\detokenize{#1} = \detokenize\expandafter{#1}}%
+}
+
+% Prints a frame around argument value.
+\newcommand{\DebugBox}[1]{%
+    \fbox{\strut #1}%
+}
+
+% Prints a marker in the margin (good for tracing flow).
+\newcommand{\Mark}[1]{%
+    \marginpar{\tiny\ttfamily #1}%
+}
+
+% Highlights arguments during debugging.
+\newcommand{\DisplayArgs}[1]{%
+    \typeout{=== Arguments: #1}%
+}
+
+% Prints the current file:line number
+\newcommand{\DisplayWhereAmI}{%
+    \typeout{=== At \jobname.tex, line \the\inputlineno}%
+}

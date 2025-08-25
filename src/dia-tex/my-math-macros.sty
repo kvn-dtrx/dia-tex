@@ -337,10 +337,12 @@
     {#1 / #2}
 }
 
+% Text Prefixes Involving Math Symbols
 \newcommand*{\textsigma}{\ensuremath{\othersigma}}
-\def\textstar{\ensuremath{{}^*}}
-\newcommand*{\Cstar}[1]{\ensuremath{\mathrm C^*}}
-\newcommand*{\weakstar}[1]{weak\ensuremath{{}^\star}}
-\newcommand*{\schwachstern}[1]{schwach\ensuremath{{}^\star}}
+% \newcommand*{\textstar}{\ensuremath{{}^*}}
+\renewcommand*{\textstar}{\ensuremath{{}^*}}
+\newcommand*{\Cstar}{\ensuremath{\mathrm{C}^*}}
+\newcommand*{\weakstar}{\ensuremath{\text{weak}^*}}
+\newcommand*{\schwachstern}{\ensuremath{\text{schwach}^*}}
 
 % ---
