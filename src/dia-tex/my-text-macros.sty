@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesPackage{my-text-macros}[%
-    2018/01/01 v0.0-dev Custom text-related user macros.%
+    2018/01/01 v0.0-dev My text-related user-level macros.%
 ]
 
 % ---
@@ -19,44 +19,43 @@
 \newcommand*{\vs}[1]{vs.}
 \newcommand*{\viz}[1]{viz.}
 
-% Shortcuts for shortcuts with dots in its interior
+% Macros for abbreviations with interior spatium
 \newcommand*{\aka}[1]{a.{\spatium}k.{\spatium}a.}
+\newcommand*{\as}[1]{a.{\spatium}s.}
+\newcommand*{\BSc}[1]{B.{\spatium}Sc.}
+% % `\dh`' is already defined by `fontenc` with T1 option.
+% \newcommand*{\dh}[1]{d.{\spatium}h.}
 \newcommand*{\eg}[1]{e.{\spatium}g.}
+\newcommand*{\fue}[1]{f.{\spatium}ü.}
+\newcommand*{\iA}[1]{i.{\spatium}A.}
 \newcommand*{\ie}[1]{i.{\spatium}e.}
+\newcommand*{\io}[1]{i.{\spatium}o.}
+\newcommand*{\iV}[1]{i.{\spatium}V.}
 \newcommand*{\loccit}[1]{loc.{\spatium}cit.}
+\newcommand*{\maW}[1]{m.{\spatium}a.{\spatium}W}
+\newcommand*{\MSc}[1]{M.{\spatium}Sc.}
 \newcommand*{\NN}[1]{N.{\spatium}N.}
+\newcommand*{\oae}[1]{o.{\spatium}ä.}
 \newcommand*{\opcit}[1]{op.{\spatium}cit.}
+\newcommand*{\PhD}[1]{Ph.{\spatium}D.}
+\newcommand*{\ProfDr}[1]{Prof.{\spatium}Dr.}
 \newcommand*{\PS}[1]{p.{\spatium}s.}
 \newcommand*{\RIP}[1]{R.{\spatium}I.{\spatium}P.}
+\newcommand*{\ua}[1]{u.{\spatium}a.}
 \newcommand*{\wrt}[1]{w.{\spatium}r.{\spatium}t.}
+\newcommand*{\zB}[1]{z.{\spatium}B.}
 
 \let\olddh=\dh%
 \def\dh#1{d.{\spatium}h.}
-% The macro \dh is already defined by fontenc with T1 option.
-
-\newcommand*{\iA}[1]{i.{\spatium}A.}
-\newcommand*{\iV}[1]{i.{\spatium}V.}
-\newcommand*{\maW}[1]{m.{\spatium}a.{\spatium}W}
-\newcommand*{\oae}[1]{o.{\spatium}ä.}
-\newcommand*{\ua}[1]{u.{\spatium}a.}
-\newcommand*{\zB}[1]{z.{\spatium}B.}
-
-% Academic Titles
-\newcommand*{\BSc}[1]{B.{\spatium}Sc.}
-\newcommand*{\MSc}[1]{M.{\spatium}Sc.}
-\newcommand*{\ProfDr}[1]{Prof.{\spatium}Dr.}
 
 % ---
 
 % Shortcuts for textual delimiters
 
-% Chevrons require `fontenc` with T1 option!
-\RequirePackage[T1]{fontenc}
-
-\newcommand*{\quoting}[1]{\guillemotright#1\guillemotleft}
-\newcommand*{\colloquial}[1]{\guillemotright#1\guillemotleft}
+\newcommand*{\quoting}[1]{\textquotedblright#1\textquotedblleft}
+\newcommand*{\colloquial}[1]{\textquotedblright#1\textquotedblleft}
 \newcommand*{\gravename}[1]{{\normalfont\scshape#1}}
-\newcommand*{\overstating}[1]{\guillemotright#1\guillemotleft}
+\newcommand*{\overstating}[1]{\textquotedblright#1\textquotedblleft}
 
 % ---
 

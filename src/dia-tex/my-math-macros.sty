@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesPackage{my-math-macros}[%
-    2018/01/01 v0.0-dev Custom math-related user macros.%
+    2018/01/01 v0.0-dev My math-related user-level macros.%
 ]
 
 % ---
@@ -10,23 +10,6 @@
 
 % mathtools - Mathematical tools to use with amsmath.
 \RequirePackage{mathtools}
-
-% fouriernc - Use New Century Schoolbook text with Fourier maths fonts.
-\RequirePackage{fouriernc}
-
-% % Assert =amsmath < mathalfa=, compare with:
-% % mathalfa - General package for loading maths alphabets in LaTeX.
-% \RequirePackage[%
-%     % =\mathfrak= alphabet.
-%     frak = euler,%
-%     frakscaled = .9,%
-%     % =\mathbb= alphabet.
-%     bb = ams,%
-%     % =\mathcal= alphabet.
-%     cal = euler,%
-%     % =\mathscr= alphabet.
-%     scr = rsfso,%
-% ]{mathalfa}
 
 % amssymb - ???
 \RequirePackage{amssymb}
@@ -67,19 +50,9 @@
 
 % ---
 
-% VarGreek characters
-\newcommand*{\epsilonn}{\varepsilon}
-\newcommand*{\otherepsilonn}{\othervarepsilon}
-\newcommand*{\phii}{\varphi}
-\newcommand*{\otherphii}{\othervarphi}
-\newcommand*{\thetaa}{\vartheta}
-\newcommand*{\otherthetaa}{\othervartheta}
-
-% The commands with "other"-prefix are provided by fouriernc, for example.
-
-% Mnemoic: Prefix "other" tags the more rarely used version:
-% For the lower-case ones, "other" gives the upright version,
-% for upper-case ones, "other" gives the slanted version, respectively.
+% % Mnemoic: Prefix "other" tags the more rarely used version:
+% % For the lower-case ones, "other" gives the upright version,
+% % for upper-case ones, "other" gives the slanted version, respectively.
 
 % Landau's (O|o) should be an Omicron!
 \newcommand*{\Omicron}{{\mathcal O}}
@@ -110,6 +83,7 @@
 \newcommand*{\xra}{\xrightarrow}
 
 % Unary Mathematical embracements
+\@ifpackageloaded{mathtools}{
 \DeclarePairedDelimiter{\abrackets}{\langle}{\rangle}
 \DeclarePairedDelimiter{\cbrackets}{\{}{\}}
 \DeclarePairedDelimiter{\rbrackets}{(}{)}
@@ -120,8 +94,10 @@
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\bra}{\langle}{|}
 \DeclarePairedDelimiter{\ket}{|}{\rangle}
+}{}
 
 % Binary mathematical embracements
+\@ifpackageloaded{mathtools}{
 \newcommand*{\comprehension@separator}{\,:\,}
 \DeclarePairedDelimiterX{\family}[2]{(}{)}{\,#1\comprehension@separator#2\,}
 \DeclarePairedDelimiterX{\set}[2]{\{}{\}}{\,#1\comprehension@separator#2\,}
@@ -138,6 +114,7 @@
 \DeclarePairedDelimiterX{\convco}[2]{[}{)}{#1; #2}
 \DeclarePairedDelimiterX{\convoc}[2]{[}{)}{#1; #2}
 \DeclarePairedDelimiterX{\convoo}[2]{(}{)}{#1; #2}
+}{}
 
 % Marginal Reason
 \DeclarePairedDelimiter{\AlignMarginalReasonDelimiter}{|}{.}
@@ -165,11 +142,7 @@
 \newcommand*{\IX}{{\mathbb X}}
 \newcommand*{\IZ}{{\mathbb Z}}
 
-% ENIGMA: Purpose of these macros?
-\newcommand*{\Initial}{\mathbb A}
-\newcommand*{\Final}{\mathbb O}
-
-% Basic diacritica
+% Basic Diacritica
 \newcommand*{\ol}{\overline}
 \newcommand*{\ti}{\tilde}
 \newcommand*{\ul}{\underline}
@@ -183,12 +156,13 @@
 \newcommand*{\ArgTwo}{\ArgRaw{2}}
 \newcommand*{\ArgThree}{\ArgRaw{3}}
 
-% Miscellaneous symbols with no arguments
+% Miscellaneous Symbols with No Arguments
 \newcommand*{\bsl}{\backslash}
 \newcommand*{\Ell}{\mathrm L}
 \newcommand*{\de}{{\, \mathrm d}}
 \newcommand*{\debar}{{\,\one@other{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
-\newcommand*{\dirac}{\otherdelta}
+% \newcommand*{\dirac}{\otherdelta}
+\newcommand*{\dirac}{\delta}
 \newcommand*{\im}{\imath}
 \newcommand*{\jm}{\jmath}
 \newcommand*{\id}{{\mathrm{id}}}
@@ -204,9 +178,9 @@
 \newcommand*{\sups}{\supseteq}
 \newcommand*{\starset}{\{ \star \}}
 \newcommand*{\tleq}{\trianglelefteqslant}
-% `\one@other` can be founde at the end of the file
+% `\one@other` can be found at the end of this file.
 
-% Miscellaneous symbols with mandatory arguments
+% Miscellaneous Symbols with Mandatory Arguments
 \newcommand*{\wo}[1]{\backslash \{#1\}}
 \newcommand*{\diff}[1]{\frac{\mr d}{\mr d #1}}
 \newcommand*{\del}[2]{\frac{\partial #1} {\partial #2}}
@@ -219,7 +193,7 @@
 \newcommand*{\EX}[2][]{\ifx \relax#1\relax \exists \, #2. \ \else \exists_{#1} \, #2 \colon \ \fi}
 \newcommand*{\EXone}[2][]{\ifx \relax#1\relax \exists{!} \, #2. \ \else \exists{!}_{#1} \, #2 \colon \ \fi}
 
-% Named operators
+% Named Unhyphened Operators
 \newcommand*{\Aut}{\operatorname{Aut}}
 \newcommand*{\abco}{\operatorname{absconv}}
 \newcommand*{\aff}{\operatorname{aff}}
@@ -244,6 +218,7 @@
 \newcommand*{\fib}{\operatorname{fib}}
 \newcommand*{\Fix}{\operatorname{Fix}}
 \newcommand*{\graph}{\operatorname{graph}}
+% \newcommand*{\Im}{\operatorname{Im}}
 \renewcommand*{\Im}{\operatorname{Im}}
 \newcommand*{\ind}{{\operatorname{ind}}}
 \newcommand*{\inj}{{\operatorname{inj}}}
@@ -263,6 +238,7 @@
 \newcommand*{\Pot}{\operatorname{Pot}}
 \newcommand*{\ran}{\operatorname{ran}}
 \newcommand*{\Ran}{\operatorname{Ran}}
+% \newcommand*{\Re}{\operatorname{Re}}
 \renewcommand*{\Re}{\operatorname{Re}}
 \newcommand*{\rej}{\operatorname{rej}}
 \newcommand*{\rk}{\operatorname{rk}}
@@ -281,7 +257,7 @@
 % Should be avoided.
 \newcommand*{\op}[1]{\operatorname{#1}}
 
-% Math Operators
+% Named Hyphened Operators
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
 \DeclareMathOperator*{\prolim}{pro\,lim}
@@ -342,6 +318,7 @@
 \newcommand*{\defiff}{\vcentcolon \Longleftrightarrow}
 \newcommand*{\defIff}{\quad \defiff \quad}
 \newcommand*{\Iff}{\quad \iff \quad}
+% \newcommand*{\implies}{\Rightarrow}
 \renewcommand*{\implies}{\Rightarrow}
 \newcommand*{\Implies}{\quad \Longrightarrow \quad}
 
@@ -359,11 +336,6 @@
     {#1 / #2}
     {#1 / #2}
 }
-
-% Macros for terms involving mathematical symbols
-\newcommand*{\as}[1]{a.{\kern0.1em}s.}
-\newcommand*{\fue}[1]{f.{\kern0.1em}ü.}
-\newcommand*{\io}[1]{i.{\kern0.1em}o.}
 
 \newcommand*{\textsigma}{\ensuremath{\othersigma}}
 \def\textstar{\ensuremath{{}^*}}
