@@ -1,20 +1,25 @@
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesPackage{my-math-macros}[%
-    2018/01/01 v0.0-dev My math-related user-level macros.%
+    1970/01/01 v0.0-dev My math-related user-level macros.%
 ]
 
 % ---
 
-% Make sure that all symbols are defined (other combinations of packages would be possible...).
+\@ifpackageloaded{amsmath}{}{%
+    \newcommand{\DeclareMathOperator}[2]{%
+        \expandafter\newcommand\csname #1\endcsname{#2}%
+    }%
+}
 
-% mathtools - Mathematical tools to use with amsmath.
-\RequirePackage{mathtools}
-
-% amssymb - ???
-\RequirePackage{amssymb}
-
-% ---
+\@ifpackageloaded{mathtools}{}{%
+    \newcommand{\DeclarePairedDelimiter}[3]{%
+        \expandafter\newcommand*\csname #1\endcsname[1]{##1}%
+    }%
+    \newcommand{\DeclarePairedDelimiterX}[3]{%
+        \expandafter\newcommand*\csname #1\endcsname[1]{##1}%
+    }%
+}
 
 % An auxiliary macro for printing one symbol on top
 % of another in every situation.
@@ -50,11 +55,7 @@
 
 % ---
 
-% % Mnemoic: Prefix "other" tags the more rarely used version:
-% % For the lower-case ones, "other" gives the upright version,
-% % for upper-case ones, "other" gives the slanted version, respectively.
-
-% Landau's (O|o) should be an Omicron!
+% Landau's (big) O and (small) o – actually, Landau's Omicrons …
 \newcommand*{\Omicron}{{\mathcal O}}
 \newcommand*{\omicron}{{{%
                     \mathchoice
@@ -64,15 +65,16 @@
                     {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}} % \scriptscriptstyle
                 }}}
 
-% Mathematical typefaces
+% Mathematical Typefaces
 \newcommand*{\mb}{\mathbb}
-\providecommand{\bm}{\mathbf}% Usually, the bm package is loaded
+% \newcommand{\bm}{\mathbf}
 \newcommand*{\mc}{\mathcal}
 \newcommand*{\mf}{\mathfrak}
 \newcommand*{\mr}{\mathrm}
 \newcommand*{\msc}{\mathscr}
+\def\bm{\mathbf}
 
-% Mathematical arrows
+% Mathematical Arrows
 \newcommand*{\ra}{\rightarrow}
 \newcommand*{\la}{\leftarrow}
 \newcommand*{\Ra}{\Rightarrow}
@@ -82,8 +84,7 @@
 \newcommand*{\hra}{\hookrightarrow}
 \newcommand*{\xra}{\xrightarrow}
 
-% Unary Mathematical embracements
-\@ifpackageloaded{mathtools}{
+% Unary Mathematical Embracements
 \DeclarePairedDelimiter{\abrackets}{\langle}{\rangle}
 \DeclarePairedDelimiter{\cbrackets}{\{}{\}}
 \DeclarePairedDelimiter{\rbrackets}{(}{)}
@@ -94,7 +95,7 @@
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 \DeclarePairedDelimiter{\bra}{\langle}{|}
 \DeclarePairedDelimiter{\ket}{|}{\rangle}
-}{}
+
 
 % Binary mathematical embracements
 \@ifpackageloaded{mathtools}{

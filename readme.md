@@ -2,17 +2,10 @@
 
 ## Synopsis
 
-This repository contains a collection of utils for LaTeX we regularly use across (*διά*) different LaTeX projects.
-
-## Installation
-
-``` shell
-cd "${XDG_DATA_HOME}" &&
-    git clone <repo-remote> &&
-    cd dia-tex &&
-        make ln
-```
+This repository contains a collection of user-level macros for LaTeX the author regularly employs across (*διά*) different LaTeX projects.
 
 ## Colophon
 
 **Author:** [kvn-dtrx](https://github.com/kvn-dtrx)
+
+**License:** [MIT License](license.txt)

@@ -1,52 +1,52 @@
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesPackage{my-text-macros}[%
-    2018/01/01 v0.0-dev My text-related user-level macros.%
+    1970/01/01 v0.0-dev My text-related user-level macros.%
 ]
 
 % ---
 
-% In the following, the dummy argument {} will be required
-% for correct spacing ... furthermore, this asserts
-% correct endmark placing for `ntheorem` (think of `\dots`!)
+% NOTE For zero-argument text macros like the following, it is
+% advisable to append an empty group `{}` in order
+% to ensure correct spacing.
 
 % Auxiliary macro for the interletter space
 \newcommand*{\spatium}{\kern 0.1 em \relax}
 
 % Shortcuts for simple shortcuts without dots in its interior
-\newcommand*{\bzw}[1]{bzw.}
-\newcommand*{\usw}[1]{usw.}
-\newcommand*{\vs}[1]{vs.}
-\newcommand*{\viz}[1]{viz.}
+\newcommand*{\bzw}{bzw.}
+\newcommand*{\usw}{usw.}
+\newcommand*{\vs}{vs.}
+\newcommand*{\viz}{viz.}
 
 % Macros for abbreviations with interior spatium
-\newcommand*{\aka}[1]{a.{\spatium}k.{\spatium}a.}
-\newcommand*{\as}[1]{a.{\spatium}s.}
-\newcommand*{\BSc}[1]{B.{\spatium}Sc.}
-% % `\dh`' is already defined by `fontenc` with T1 option.
-% \newcommand*{\dh}[1]{d.{\spatium}h.}
-\newcommand*{\eg}[1]{e.{\spatium}g.}
-\newcommand*{\fue}[1]{f.{\spatium}ü.}
-\newcommand*{\iA}[1]{i.{\spatium}A.}
-\newcommand*{\ie}[1]{i.{\spatium}e.}
-\newcommand*{\io}[1]{i.{\spatium}o.}
-\newcommand*{\iV}[1]{i.{\spatium}V.}
-\newcommand*{\loccit}[1]{loc.{\spatium}cit.}
-\newcommand*{\maW}[1]{m.{\spatium}a.{\spatium}W}
-\newcommand*{\MSc}[1]{M.{\spatium}Sc.}
-\newcommand*{\NN}[1]{N.{\spatium}N.}
-\newcommand*{\oae}[1]{o.{\spatium}ä.}
-\newcommand*{\opcit}[1]{op.{\spatium}cit.}
-\newcommand*{\PhD}[1]{Ph.{\spatium}D.}
-\newcommand*{\ProfDr}[1]{Prof.{\spatium}Dr.}
-\newcommand*{\PS}[1]{p.{\spatium}s.}
-\newcommand*{\RIP}[1]{R.{\spatium}I.{\spatium}P.}
-\newcommand*{\ua}[1]{u.{\spatium}a.}
-\newcommand*{\wrt}[1]{w.{\spatium}r.{\spatium}t.}
-\newcommand*{\zB}[1]{z.{\spatium}B.}
+\newcommand*{\aka}{a.{\spatium}k.{\spatium}a.}
+\newcommand*{\as}{a.{\spatium}s.}
+\newcommand*{\BSc}{B.{\spatium}Sc.}
+% % `\dh` is already defined by `fontenc` with T1 option.
+% \newcommand*{\dh}{d.{\spatium}h.}
+\newcommand*{\eg}{e.{\spatium}g.}
+\newcommand*{\fue}{f.{\spatium}ü.}
+\newcommand*{\iA}{i.{\spatium}A.}
+\newcommand*{\ie}{i.{\spatium}e.}
+\newcommand*{\io}{i.{\spatium}o.}
+\newcommand*{\iV}{i.{\spatium}V.}
+\newcommand*{\loccit}{loc.{\spatium}cit.}
+\newcommand*{\maW}{m.{\spatium}a.{\spatium}W}
+\newcommand*{\MSc}{M.{\spatium}Sc.}
+\newcommand*{\NN}{N.{\spatium}N.}
+\newcommand*{\oae}{o.{\spatium}ä.}
+\newcommand*{\opcit}{op.{\spatium}cit.}
+\newcommand*{\PhD}{Ph.{\spatium}D.}
+\newcommand*{\ProfDr}{Prof.{\spatium}Dr.}
+\newcommand*{\PS}{p.{\spatium}s.}
+\newcommand*{\RIP}{R.{\spatium}I.{\spatium}P.}
+\newcommand*{\ua}{u.{\spatium}a.}
+\newcommand*{\wrt}{w.{\spatium}r.{\spatium}t.}
+\newcommand*{\zB}{z.{\spatium}B.}
 
 \let\olddh=\dh%
-\def\dh#1{d.{\spatium}h.}
+\def\dh{d.{\spatium}h.}
 
 % ---
 
@@ -80,25 +80,3 @@
 \newcommand*{\born}[3]{%
     *\dateprint{#1}{#2}{#3}%
 }
-
-% ---
-
-% NOTE The remaining macros should be included in classes or made obsolete
-
-% ---
-
-
-%\newcommand*{\Index}[1]{\index{}}
-
-\newcommand*{\definiendum}[2][]{%
-    {\color{mainaccentcolor}#2}%
-    \ifx\relax#1\relax%
-        \index{#2}%
-    \else%
-        \index{#1}
-    \fi%
-}
-
-
-
-% ---
