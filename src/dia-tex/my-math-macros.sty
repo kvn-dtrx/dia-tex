@@ -7,17 +7,19 @@
 % ---
 
 \@ifpackageloaded{amsmath}{}{%
+    \PackageWarning{my-math-macros}{`amsmath` not loaded. \string\DeclareMathOperator will be a no-op}%
     \newcommand{\DeclareMathOperator}[2]{%
-        \expandafter\newcommand\csname #1\endcsname{#2}%
+        \@namedef{#1}{#2}%
     }%
 }
 
 \@ifpackageloaded{mathtools}{}{%
+    \PackageWarning{my-math-macros}{`mathtools` not loaded. \string\DeclarePairedDelimiter(|X) commands will be no-ops.}%
     \newcommand{\DeclarePairedDelimiter}[3]{%
-        \expandafter\newcommand*\csname #1\endcsname[1]{##1}%
+        \@namedef{#1}{##3}%
     }%
     \newcommand{\DeclarePairedDelimiterX}[3]{%
-        \expandafter\newcommand*\csname #1\endcsname[1]{##1}%
+        \@namedef{#1}{##3}%
     }%
 }
 

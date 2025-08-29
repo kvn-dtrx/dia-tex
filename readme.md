@@ -2,7 +2,7 @@
 
 ## Synopsis
 
-This repository contains a collection of user-level macros for LaTeX the author regularly employs across (*διά*) different LaTeX projects.
+This repository contains a collection of user-level macros, which the author regularly employs across (*διά*) various LaTeX projects. Taken in its entirety, it is likely to be of use solely to the author himself.
 
 ## Colophon
 

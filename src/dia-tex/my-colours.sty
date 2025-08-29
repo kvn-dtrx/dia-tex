@@ -6,21 +6,23 @@
 
 % ---
 
-\RequirePackage{xcolor}
+\@ifpackageloaded{xcolor}{}{%
+    \PackageWarning{my-colour}{`xcolor` not loaded. Color commands will be no-ops.}%
+    \newcommand{\definecolor}[3]{\@namedef{#1}{}}%
+    \newcommand{\colorlet}[3]{\@namedef{#1}{}}%
+}
 
 % Collected Colours
 \definecolor{amazon}{rgb}{0.23, 0.47, 0.34}
 \definecolor{artichoke}{rgb}{0.56, 0.59, 0.47}
 \definecolor{ashgrey}{rgb}{0.7, 0.75, 0.71}
 \definecolor{asphalt}{rgb}{0.05, 0.02, 0.02}
-\definecolor{babypowder}{rgb}{1.0, 1.0, 0.98}
 \definecolor{beige}{rgb}{0.96, 0.96, 0.86}
 \definecolor{blonde}{rgb}{0.98, 0.96, 0.85}
 \definecolor{bluegray}{rgb}{0.48, 0.48, 0.75}
 \definecolor{brown}{rgb}{0.65, 0.16, 0}
 \definecolor{carbonblack}{rgb}{0.05, 0.04, 0.00}
 \definecolor{cardinalred}{rgb}{0.77, 0.12, 0.23}
-\definecolor{chalkwhite}{rgb}{0.98, 1.0, 1.0}
 \definecolor{charcoal}{rgb}{0.21, 0.27, 0.31}
 \definecolor{cream}{rgb}{1.00, 0.99, 0.82}
 \definecolor{crimson}{rgb}{0.86, 0.08, 0.24}
@@ -38,7 +40,6 @@
 \definecolor{goldenrod}{rgb}{0.47, 0.64, 0.13}
 \definecolor{gold}{rgb}{1.0, 0.84, 0}
 \definecolor{guardsmanred}{rgb}{0.80, 0.00, 0.00}
-\definecolor{gutenbergred}{rgb}{0.43, 0.14, 0.14}
 \definecolor{hotpink}{rgb}{1.0, 0.41, 0.71}
 \definecolor{indigo}{rgb}{0.25, 0.00, 0.59}
 \definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
@@ -57,7 +58,6 @@
 \definecolor{neonyellow}{rgb}{0.88, 0.91, 0.13}
 \definecolor{night}{rgb}{0.05, 0.04, 0.04}
 \definecolor{orchid}{rgb}{0.85, 0.44, 0.84}
-\definecolor{othergutenbergred}{rgb}{0.72, 0.08, 0.08}
 \definecolor{pastelyellow}{rgb}{0.99, 0.99, 0.59}
 \definecolor{pucepantone}{rgb}{0.31, 0.23, 0.27}
 \definecolor{puce}{rgb}{0.80, 0.53, 0.60}
@@ -69,11 +69,10 @@
 \definecolor{silver}{rgb}{0.75, 0.75, 0.75}
 \definecolor{teal}{rgb}{0, 0.5, 0.5}
 \definecolor{tomato}{rgb}{1.0, 0.5, 0.31}
-\definecolor{truegutenbergred}{rgb}{0.75, 0.13, 0.12}
 \definecolor{vampireblack}{rgb}{0.03, 0.03, 0.03}
 \definecolor{vanilla}{rgb}{0.95, 0.9, 0.67}
+\definecolor{vermillion}{rgb}{0.89,0.26,0.20}
 \definecolor{whitesmoke}{rgb}{0.96, 0.96, 0.96}
-
 
 % Owl Colour Theme
 \definecolor{OwlRed}{RGB}{255,92,168}
@@ -85,3 +84,7 @@
 \colorlet{OwlBrown}{OwlRed!50!OwlGreen}
 \colorlet{OwlOrange}{OwlRed!50!OwlYellow}
 \colorlet{OwlCyan}{OwlGreen!50!OwlBlue}
+
+% Non-ofiicial
+\definecolor{gutenbergred}{rgb}{0.43, 0.14, 0.14}
+\definecolor{truegutenbergred}{rgb}{0.75, 0.13, 0.12}

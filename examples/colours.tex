@@ -1,0 +1,40 @@
+% ---
+% description: Illustration of Some Colours
+% ---
+
+% ---
+
+\documentclass[
+    dina4,
+    parskip=full,
+]{scrreport}
+
+\title{Illustration of Some Colours}
+\author{Numerius Negidius}
+\date{1970-01-01}
+
+\usepackage{xcolor}
+
+\usepackage{my-colours}
+
+\usepackage{kantlipsum}
+
+\begin{document}
+
+\maketitle
+
+\pagecolor{black}
+
+\makeatletter
+\@for\bgclr:=white,gray,black\do{
+    \newpage
+    \section*{Background Colour: \bgclr}
+    \pagecolor{\bgclr}
+    \@for\fgclr:=%
+    amazon,artichoke,ashgrey,asphalt,beige,blonde,bluegray,brown,carbonblack,cardinalred,charcoal,cream,crimson,crow,darkblue,darkgray,darkmagenta,darkred,darkslategray,deepjunglegreen,dimgray,eerieblack,gainsboro,giantsorange,goldenrod,gold,guardsmanred,hotpink,indigo,lightblue,lightcoral,lightcyan,lightgray,lightyellow,matteblack,mistyrose,neonblue,neonfuschia,neongreen,neonorange,neonpurple,neonred,neonyellow,night,orchid,pastelyellow,pucepantone,puce,raisin-black,rosegold,rosequartz,ruby,safetyyellow,silver,teal,tomato,vampireblack,vanilla,vermillion,whitesmoke\do{%
+        \noindent{\color{\fgclr}\llap{\small\textbf{\fgclr:}\quad}\kant[1][3]}\par%
+    }
+}
+\makeatother
+
+\end{document}

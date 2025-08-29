@@ -1,11 +1,15 @@
-[gitignore]
-sources = ["base.ignore"]
+[[gitignore]]
+sources = ["base.ignore", "latex.ignore"]
 target = ".gitignore"
 
-[license]
-sources = ["mit.txt"]
-target = "license.txt"
+# [[license]]
+# sources = ["mit.txt"]
+# target = "license.txt"
 
-[makefile]
-sources = ["latex-package.mk"]
-target = "makefile"
+# [[makefile]]
+# sources = ["latex-package.mk"]
+# target = "makefile"
+
+[[latexmkrc]]
+sources = ["base.pl", "pdflatex.pl"]
+target = "examples/.latexmkrc"
