@@ -13,6 +13,10 @@
 \author{Numerius Negidius}
 \date{1970-01-01}
 
+\usepackage{numprint}
+
+\usepackage{datetime2}
+
 \usepackage{my-text-macros}
 
 \usepackage{kantlipsum}
@@ -21,14 +25,32 @@
 
 \maketitle
 
-Abbreviations without interior dots: \bzw{}, \usw{}, \vs{}, \viz{} \ldots{}
+\section{Abbreviations without Interior Dots}
 
-Abbreviations with interior dots: \aka{}, \as{}, \BSc{}, \eg{}, \ldots{}
+\bzw{}, \usw{}, \vs{}, \viz{} \ldots{}
 
-Textual delimiters:
+\section{Abbreviations with Interior Dots}
 
-Amounts of money:
+\aka{}, \as{}, \BSc{}, \eg{}, \ldots{}
 
-Dates:
+\section{Textual Delimiters}
+
+Quoting: \quoting{Foo, Bar, Baz, Qux, Quux, Quuz, Corge, Grault, Garply, Waldo, Fred, Plugh, Xyzzy, Thud}
+
+Colloquial: \colloquial{Foo, Bar, Baz, Qux, Quux, Quuz, Corge, Grault, Garply, Waldo, Fred, Plugh, Xyzzy, Thud}
+
+Grave Name: \gravename{Foo, Bar, Baz, Qux, Quux, Quuz, Corge, Grault, Garply, Waldo, Fred, Plugh, Xyzzy, Thud}
+
+Overstating: \overstating{Foo, Bar, Baz, Qux, Quux, Quuz, Corge, Grault, Garply, Waldo, Fred, Plugh, Xyzzy, Thud}
+
+\section{Amounts of Money}
+
+Dollar: \DOLLAR{3}, \DOLLAR{3.1}, \DOLLAR{3.14}, \DOLLAR{3.141}, \DOLLAR{3.1415}
+
+Euro: \EURO{3}, \EURO{3.1}, \EURO{3.14}, \EURO{3.141}, \EURO{3.1415}
+
+\section{Dates}
+
+\dateprint{1970}{01}{01}
 
 \end{document}

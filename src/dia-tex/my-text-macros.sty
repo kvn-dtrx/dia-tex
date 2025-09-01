@@ -61,17 +61,28 @@
 
 % Amounts of money
 
-\RequirePackage{numprint}
-\nprounddigits{2}
+\@ifpackageloaded{numprint}{
+    \nprounddigits{2}
+}{%
+    \PackageWarning{my-math-macros}{`numprint` not loaded. \string\numprint will be a no-op}%
+    \newcommand{\numprint}[1]{%
+        \@namedef{#1}%
+    }%
+}
 
+\newcommand*{\DOLLAR}[1]{\numprint{#1}~{\scshape\lowercase{DOL}}}
 \newcommand*{\EURO}[1]{\numprint{#1}~{\scshape\lowercase{EUR}}}
-\newcommand*{\DOLLAR}[1]{\numprint{#1}\,DOL}
 
 % ---
 
 % Date-related
 
-\RequirePackage{datetime2}
+\@ifpackageloaded{datetime2}{}{%
+    \PackageWarning{my-math-macros}{`datetime` not loaded. \string\DTMdisplaydate will be a no-op}%
+    \newcommand{\DTMdisplaydate}[4]{%
+        \@namedef{#1}{#2}{#3}{#4}%
+    }%
+}
 
 \newcommand*{\dateprint}[3]{%
     \DTMdisplaydate{#1}{#2}{#3}{-1}%

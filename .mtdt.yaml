@@ -1,0 +1,7 @@
+project:
+  name: Dia-TeX
+  description: A collection of TeX resources requisite across projects
+  github: https://github.com/kvn-dtrx/dia-tex
+  authors:
+    - name: Kvn Dtrx
+      mail: kvn.dtrx+git@protonmail.ch
