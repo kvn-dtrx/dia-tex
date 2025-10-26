@@ -299,94 +299,94 @@
 
 % NOTE The optimal parameters are very likely font-dependent, unfortunately …
 
-\ExplSyntaxOn
+% \ExplSyntaxOn
 
-% Define keys with defaults
-\dim_new:N \l_overlay_h_dim
-\dim_new:N \l_overlay_display_dim
-\dim_new:N \l_overlay_text_dim
-\dim_new:N \l_overlay_script_dim
-\dim_new:N \l_overlay_scriptscript_dim
+% % Define keys with defaults
+% \dim_new:N \l_overlay_h_dim
+% \dim_new:N \l_overlay_display_dim
+% \dim_new:N \l_overlay_text_dim
+% \dim_new:N \l_overlay_script_dim
+% \dim_new:N \l_overlay_scriptscript_dim
 
-\keys_define:nn { overlay }
-{
-    h  .dim_set:N = \l_overlay_h_dim,
-    h  .initial:n = 0ex,
-    display  .dim_set:N = \l_overlay_display_dim,
-    display  .initial:n = 0ex,
-    text  .dim_set:N = \l_overlay_text_dim,
-    text  .initial:n = 0ex,
-    script  .dim_set:N = \l_overlay_script_dim,
-    script  .initial:n = 0ex,
-    scriptscript .dim_set:N = \l_overlay_scriptscript_dim,
-    scriptscript .initial:n = 0ex,
-}
+% \keys_define:nn { overlay }
+% {
+%     h  .dim_set:N = \l_overlay_h_dim,
+%     h  .initial:n = 0ex,
+%     display  .dim_set:N = \l_overlay_display_dim,
+%     display  .initial:n = 0ex,
+%     text  .dim_set:N = \l_overlay_text_dim,
+%     text  .initial:n = 0ex,
+%     script  .dim_set:N = \l_overlay_script_dim,
+%     script  .initial:n = 0ex,
+%     scriptscript .dim_set:N = \l_overlay_scriptscript_dim,
+%     scriptscript .initial:n = 0ex,
+% }
 
-\NewDocumentCommand{\OneOverlay}{ O{} m m }{
-    % #1 = key-value argument for offsets
-    % #2 = base symbol
-    % #3 = overlay symbol
-    \math_overlay:nnn {#1} {#2} {#3}
-}
+% \NewDocumentCommand{\OneOverlay}{ O{} m m }{
+%     % #1 = key-value argument for offsets
+%     % #2 = base symbol
+%     % #3 = overlay symbol
+%     \math_overlay:nnn {#1} {#2} {#3}
+% }
 
-\cs_new_protected:Npn \math_overlay:nnn #1#2#3
-{
-    \keys_set:nn { overlay } { #1 }
-    \mathchoice
-    {
-        \mathalpha{\ooalign{%
-                $\displaystyle #2$\cr
-                \hidewidth \raise\l_overlay_display_dim \hbox{$\displaystyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
-            }}%
-    }
-    {
-        \mathalpha{\ooalign{%
-                $\textstyle #2$\cr
-                \hidewidth \raise\l_overlay_text_dim \hbox{$\textstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
-            }}%
-    }
-    {
-        \mathalpha{\ooalign{%
-                $\scriptstyle #2$\cr
-                \hidewidth \raise\l_overlay_script_dim \hbox{$\scriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
-            }}%
-    }
-    {
-        \mathalpha{\ooalign{%
-                $\scriptscriptstyle #2$\cr
-                \hidewidth \raise\l_overlay_scriptscript_dim \hbox{$\scriptscriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
-            }}%
-    }
-}
+% \cs_new_protected:Npn \math_overlay:nnn #1#2#3
+% {
+%     \keys_set:nn { overlay } { #1 }
+%     \mathchoice
+%     {
+%         \mathalpha{\ooalign{%
+%                 $\displaystyle #2$\cr
+%                 \hidewidth \raise\l_overlay_display_dim \hbox{$\displaystyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+%             }}%
+%     }
+%     {
+%         \mathalpha{\ooalign{%
+%                 $\textstyle #2$\cr
+%                 \hidewidth \raise\l_overlay_text_dim \hbox{$\textstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+%             }}%
+%     }
+%     {
+%         \mathalpha{\ooalign{%
+%                 $\scriptstyle #2$\cr
+%                 \hidewidth \raise\l_overlay_script_dim \hbox{$\scriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+%             }}%
+%     }
+%     {
+%         \mathalpha{\ooalign{%
+%                 $\scriptscriptstyle #2$\cr
+%                 \hidewidth \raise\l_overlay_scriptscript_dim \hbox{$\scriptscriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+%             }}%
+%     }
+% }
 
-\ExplSyntaxOff
+% \ExplSyntaxOff
+
+\newcommand*{\OneOverlay}[7]{{\mathchoice%
+            % #1 = first symbol, #2 second symbol, #3 = horizontal correction parameter [in mu]
+            % #4, #5, #6, #7  = vertical correction parameter [in ex] in display, text, script, scriptscript mode, respectively
+            % #8 = could be mathcharacter, i.e. mathord, mathrel, ...
+            {\mathalpha{\ooalign{%
+                        $\displaystyle#1$\cr%
+                        \hidewidth\raise#4ex\hbox{$\displaystyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\textstyle#1$\cr%
+                        \hidewidth\raise#5ex\hbox{$\textstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptstyle#1$\cr%
+                        \hidewidth\raise#6ex\hbox{$\scriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptscriptstyle#1$\cr%
+                        \hidewidth\raise#7ex\hbox{$\scriptscriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+        }}
 
 \newcommand*{\debar}{{\,\OneOverlay{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
 
 \newcommand*{\pssn}{{\OneOverlay{\vartriangleright}{\cdot}{3.5}{0}{0}{0}{0}}}
 \newcommand*{\ssn}{{\OneOverlay{\circ}{\cdot}{0}{0}{0}{0}{0}}}
-
-% \newcommand*{\OneOverlay}[7]{{\mathchoice%
-%             % #1 = first symbol, #2 second symbol, #3 = horizontal correction parameter [in mu]
-%             % #4, #5, #6, #7  = vertical correction parameter [in ex] in display, text, script, scriptscript mode, respectively
-%             % #8 = could be mathcharacter, i.e. mathord, mathrel, ...
-%             {\mathalpha{\ooalign{%
-%                         $\displaystyle#1$\cr%
-%                         \hidewidth\raise#4ex\hbox{$\displaystyle#2\mkern#3mu$}\hidewidth\cr%
-%                     }}}
-%             {\mathalpha{\ooalign{%
-%                         $\textstyle#1$\cr%
-%                         \hidewidth\raise#5ex\hbox{$\textstyle#2\mkern#3mu$}\hidewidth\cr%
-%                     }}}
-%             {\mathalpha{\ooalign{%
-%                         $\scriptstyle#1$\cr%
-%                         \hidewidth\raise#6ex\hbox{$\scriptstyle#2\mkern#3mu$}\hidewidth\cr%
-%                     }}}
-%             {\mathalpha{\ooalign{%
-%                         $\scriptscriptstyle#1$\cr%
-%                         \hidewidth\raise#7ex\hbox{$\scriptscriptstyle#2\mkern#3mu$}\hidewidth\cr%
-%                     }}}
-%         }}
 
 % ---
 
