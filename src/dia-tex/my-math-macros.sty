@@ -311,7 +311,7 @@
 \keys_define:nn { overlay }
 {
     h  .dim_set:N = \l_overlay_h_dim,
-    h  .initial:n = 0mu,
+    h  .initial:n = 0ex,
     display  .dim_set:N = \l_overlay_display_dim,
     display  .initial:n = 0ex,
     text  .dim_set:N = \l_overlay_text_dim,
@@ -336,28 +336,29 @@
     {
         \mathalpha{\ooalign{%
                 $\displaystyle #2$\cr
-                \hidewidth \raise\l_overlay_d_dim \hbox{$\displaystyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+                \hidewidth \raise\l_overlay_display_dim \hbox{$\displaystyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
             }}%
     }
     {
         \mathalpha{\ooalign{%
                 $\textstyle #2$\cr
-                \hidewidth \raise\l_overlay_t_dim \hbox{$\textstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+                \hidewidth \raise\l_overlay_text_dim \hbox{$\textstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
             }}%
     }
     {
         \mathalpha{\ooalign{%
                 $\scriptstyle #2$\cr
-                \hidewidth \raise\l_overlay_s_dim \hbox{$\scriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+                \hidewidth \raise\l_overlay_script_dim \hbox{$\scriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
             }}%
     }
     {
         \mathalpha{\ooalign{%
                 $\scriptscriptstyle #2$\cr
-                \hidewidth \raise\l_overlay_ss_dim \hbox{$\scriptscriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
+                \hidewidth \raise\l_overlay_scriptscript_dim \hbox{$\scriptscriptstyle #3 \mkern \l_overlay_h_dim$} \hidewidth \cr
             }}%
     }
 }
+
 \ExplSyntaxOff
 
 \newcommand*{\debar}{{\,\OneOverlay{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
