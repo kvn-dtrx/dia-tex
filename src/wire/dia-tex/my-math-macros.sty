@@ -1,26 +1,26 @@
 \NeedsTeXFormat{LaTeX2e}
 
 \ProvidesPackage{my-math-macros}[%
-  1970/01/01 v0.0-dev My math-related user-level macros.%
+    1970/01/01 v0.0-dev My math-related user-level macros.%
 ]
 
 % ---
 
 \@ifpackageloaded{amsmath}{}{%
-  \PackageWarning{my-math-macros}{`amsmath` not loaded. \string\DeclareMathOperator will be a no-op}%
-  \newcommand{\DeclareMathOperator}[2]{%
-    \@namedef{#1}{#2}%
-  }%
+    \PackageWarning{my-math-macros}{`amsmath` not loaded. \string\DeclareMathOperator will be a no-op}%
+    \newcommand{\DeclareMathOperator}[2]{%
+        \@namedef{#1}{#2}%
+    }%
 }
 
 \@ifpackageloaded{mathtools}{}{%
-  \PackageWarning{my-math-macros}{`mathtools` not loaded. \string\DeclarePairedDelimiter(|X) commands will be no-ops.}%
-  \newcommand{\DeclarePairedDelimiter}[3]{%
-    \@namedef{#1}{##3}%
-  }%
-  \newcommand{\DeclarePairedDelimiterX}[3]{%
-    \@namedef{#1}{##3}%
-  }%
+    \PackageWarning{my-math-macros}{`mathtools` not loaded. \string\DeclarePairedDelimiter(|X) commands will be no-ops.}%
+    \newcommand{\DeclarePairedDelimiter}[3]{%
+        \@namedef{#1}{##3}%
+    }%
+    \newcommand{\DeclarePairedDelimiterX}[3]{%
+        \@namedef{#1}{##3}%
+    }%
 }
 
 % ---
@@ -65,7 +65,7 @@
 \DeclarePairedDelimiterX{\braket}[2]{\langle}{\rangle}{{#1 \delimsize | \mathopen{}#2}}
 \DeclarePairedDelimiterX{\ketbra}[2]{|}{|}{{#1 \delimsize {\rangle \langle} \mathopen{}#2}}
 \DeclarePairedDelimiterX{\dual}[2]{\langle}{\rangle}{#1, #2}
-\DeclarePairedDelimiterX{\intint}[2]{\llbracket}{\rrbracket}{#1, #2}
+\DeclarePairedDelimiterX{\intint}[2]{\lbrack\!\lbrack}{\rbrack\!\rbrack}{#1, #2}
 \DeclarePairedDelimiterX{\intcc}[2]{[}{]}{#1, #2}
 \DeclarePairedDelimiterX{\intco}[2]{[}{)}{#1, #2}
 \DeclarePairedDelimiterX{\intoc}[2]{(}{]}{#1, #2}
@@ -125,6 +125,7 @@
 \newcommand*{\MSE}{\mathbb {MSE}}
 \newcommand*{\n}{\circ}
 \newcommand*{\One}{{\mathbb 1}}
+\newcommand*{\Two}{\bm 2}
 \newcommand*{\pn}{\vartriangleright}
 \newcommand*{\psn}{\blacktriangleright}
 % \newcommand*{\pssn}{!!! Overlay symbol, see below !!!}
@@ -362,26 +363,26 @@
 % \ExplSyntaxOff
 
 \newcommand*{\OneOverlay}[7]{{\mathchoice%
-      % #1 = first symbol, #2 second symbol, #3 = horizontal correction parameter [in mu]
-      % #4, #5, #6, #7  = vertical correction parameter [in ex] in display, text, script, scriptscript mode, respectively
-      % #8 = could be mathcharacter, i.e. mathord, mathrel, ...
-      {\mathalpha{\ooalign{%
-            $\displaystyle#1$\cr%
-            \hidewidth\raise#4ex\hbox{$\displaystyle#2\mkern#3mu$}\hidewidth\cr%
-          }}}
-      {\mathalpha{\ooalign{%
-            $\textstyle#1$\cr%
-            \hidewidth\raise#5ex\hbox{$\textstyle#2\mkern#3mu$}\hidewidth\cr%
-          }}}
-      {\mathalpha{\ooalign{%
-            $\scriptstyle#1$\cr%
-            \hidewidth\raise#6ex\hbox{$\scriptstyle#2\mkern#3mu$}\hidewidth\cr%
-          }}}
-      {\mathalpha{\ooalign{%
-            $\scriptscriptstyle#1$\cr%
-            \hidewidth\raise#7ex\hbox{$\scriptscriptstyle#2\mkern#3mu$}\hidewidth\cr%
-          }}}
-    }}
+            % #1 = first symbol, #2 second symbol, #3 = horizontal correction parameter [in mu]
+            % #4, #5, #6, #7  = vertical correction parameter [in ex] in display, text, script, scriptscript mode, respectively
+            % #8 = could be mathcharacter, i.e. mathord, mathrel, ...
+            {\mathalpha{\ooalign{%
+                        $\displaystyle#1$\cr%
+                        \hidewidth\raise#4ex\hbox{$\displaystyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\textstyle#1$\cr%
+                        \hidewidth\raise#5ex\hbox{$\textstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptstyle#1$\cr%
+                        \hidewidth\raise#6ex\hbox{$\scriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+            {\mathalpha{\ooalign{%
+                        $\scriptscriptstyle#1$\cr%
+                        \hidewidth\raise#7ex\hbox{$\scriptscriptstyle#2\mkern#3mu$}\hidewidth\cr%
+                    }}}
+        }}
 
 \newcommand*{\debar}{{\,\OneOverlay{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
 
@@ -396,10 +397,10 @@
 % Compare with:
 % [A symbol for the quotient of two objects](https://tex.stackexchange.com/questions/4624)
 \newcommand*{\quot}[2]{\mathchoice%
-  {\left.\raisebox{.2em}{\ensuremath{#1}}\middle/\raisebox{-.2em}{\ensuremath{#2}}\right.}%
-  {#1 / #2}
-  {#1 / #2}
-  {#1 / #2}
+    {\left.\raisebox{.2em}{\ensuremath{#1}}\middle/\raisebox{-.2em}{\ensuremath{#2}}\right.}%
+    {#1 / #2}
+    {#1 / #2}
+    {#1 / #2}
 }
 
 % Marginal Reason
@@ -409,13 +410,13 @@
 % Landau's (big) O and (small) o – actually, Landau's Omicrons …
 \newcommand*{\Omicron}{{\mathcal O}}
 \newcommand*{\omicron}{{{%
-          \mathchoice
-          % \displaystyle
-          {{\scriptstyle\mathcal{O}}}
-          % \textstyle
-          {{\scriptstyle\mathcal{O}}}
-          % \scriptstyle
-          {{\scriptscriptstyle\mathcal{O}}}
-          % \scriptscriptstyle
-          {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}}
-        }}}
+                    \mathchoice
+                    % \displaystyle
+                    {{\scriptstyle\mathcal{O}}}
+                    % \textstyle
+                    {{\scriptstyle\mathcal{O}}}
+                    % \scriptstyle
+                    {{\scriptscriptstyle\mathcal{O}}}
+                    % \scriptscriptstyle
+                    {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}}
+                }}}
