@@ -1,10 +1,12 @@
+# ---
+# title: Gitignore for Dia-TeX
+# ---
+
+# ---
+
 # dia:begin gitignore/base.ignore
 
-# ---
-# title: Base gitignore patterns
-# ---
-
-# ---
+# --- Base ---
 
 # macOS
 ._*
@@ -54,11 +56,7 @@ tmp/
 
 # dia:begin gitignore/latex.ignore
 
-# ---
-# title: LaTeX gitignore patterns
-# ---
-
-# ---
+# --- LaTeX ---
 
 # Core latex/pdflatex auxiliary files
 .*.lb
@@ -102,7 +100,6 @@ tmp/
 
 # Build directory
 **/build/*
-!**/build/.gitkeep
 
 # Beamer
 *.nav
@@ -133,4 +130,3 @@ tmp/
 *.ind
 
 # dia:end
-

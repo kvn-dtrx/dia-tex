@@ -83,4 +83,3 @@ $ENV{'BIBINPUTS'} = join(
 $pdf_mode = 1;
 
 # dia:end
-
