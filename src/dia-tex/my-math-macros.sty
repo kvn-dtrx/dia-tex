@@ -4,35 +4,27 @@
     1970/01/01 v0.0-dev My math-related user-level macros.%
 ]
 
+% ChkTeX misparses literal delimiters and the centred dots between binary operators
+% chktex-file 9
+% chktex-file 11
+% chktex-file 17
+
 % ---
 
-\@ifpackageloaded{amsmath}{}{%
-    \PackageWarning{my-math-macros}{`amsmath` not loaded. \string\DeclareMathOperator will be a no-op}%
-    \newcommand{\DeclareMathOperator}[2]{%
-        \@namedef{#1}{#2}%
-    }%
-}
-
-\@ifpackageloaded{mathtools}{}{%
-    \PackageWarning{my-math-macros}{`mathtools` not loaded. \string\DeclarePairedDelimiter(|X) commands will be no-ops.}%
-    \newcommand{\DeclarePairedDelimiter}[3]{%
-        \@namedef{#1}{##3}%
-    }%
-    \newcommand{\DeclarePairedDelimiterX}[3]{%
-        \@namedef{#1}{##3}%
-    }%
-}
+\RequirePackage{iftex}
+\RequireLuaTeX
+\RequirePackage{mathtools}
+\RequirePackage{unicode-math}
 
 % ---
 
 % Mathematical Typefaces
-\newcommand*{\mb}{\mathbb}
-% \newcommand{\bm}{\mathbf}
-\newcommand*{\mc}{\mathcal}
-\newcommand*{\mf}{\mathfrak}
-\newcommand*{\mr}{\mathrm}
-\newcommand*{\msc}{\mathscr}
-\def\bm{\mathbf}
+\newcommand*{\mb}{\symbb}
+\newcommand*{\mc}{\symcal}
+\newcommand*{\mf}{\symfrak}
+\newcommand*{\mr}{\symrm}
+\newcommand*{\msc}{\symscr}
+\def\bm{\symbf}
 
 % Mathematical Arrows
 \newcommand*{\ra}{\rightarrow}
@@ -57,7 +49,6 @@
 \DeclarePairedDelimiter{\ket}{|}{\rangle}
 
 % Binary mathematical embracements
-\@ifpackageloaded{mathtools}{
 \newcommand*{\comprehension@separator}{\,:\,}
 \DeclarePairedDelimiterX{\family}[2]{(}{)}{\,#1\comprehension@separator#2\,}
 \DeclarePairedDelimiterX{\set}[2]{\{}{\}}{\,#1\comprehension@separator#2\,}
@@ -74,36 +65,35 @@
 \DeclarePairedDelimiterX{\convco}[2]{[}{)}{#1; #2}
 \DeclarePairedDelimiterX{\convoc}[2]{[}{)}{#1; #2}
 \DeclarePairedDelimiterX{\convoo}[2]{(}{)}{#1; #2}
-}{}
 
 % Blackboard symbols
-\newcommand*{\IA}{{\mathbb A}}
-\newcommand*{\IB}{{\mathbb B}}
-\newcommand*{\IC}{{\mathbb C}}
-\newcommand*{\ID}{{\mathbb D}}
-\newcommand*{\IE}{{\mathbb E}}
-\newcommand*{\IF}{{\mathbb F}}
-\newcommand*{\IH}{{\mathbb H}}
-\newcommand*{\II}{{\mathbb I}}
-% \newcommand*{\IJ}{{\mathbb J}}
-\newcommand*{\IK}{{\mathbb K}}
-\newcommand*{\IM}{{\mathbb M}}
-\newcommand*{\IN}{{\mathbb N}}
-\newcommand*{\IP}{{\mathbb P}}
-\newcommand*{\IQ}{{\mathbb Q}}
-\newcommand*{\IR}{{\mathbb R}}
-\newcommand*{\IS}{{\mathbb S}}
-\newcommand*{\IT}{{\mathbb T}}
-\newcommand*{\IV}{{\mathbb V}}
-\newcommand*{\IX}{{\mathbb X}}
-\newcommand*{\IZ}{{\mathbb Z}}
+\newcommand*{\IA}{\symbb{A}}
+\newcommand*{\IB}{\symbb{B}}
+\newcommand*{\IC}{\symbb{C}}
+\newcommand*{\ID}{\symbb{D}}
+\newcommand*{\IE}{\symbb{E}}
+\newcommand*{\IF}{\symbb{F}}
+\newcommand*{\IH}{\symbb{H}}
+\newcommand*{\II}{\symbb{I}}
+% \newcommand*{\IJ}{\symbb{J}}
+\newcommand*{\IK}{\symbb{K}}
+\newcommand*{\IM}{\symbb{M}}
+\newcommand*{\IN}{\symbb{N}}
+\newcommand*{\IP}{\symbb{P}}
+\newcommand*{\IQ}{\symbb{Q}}
+\newcommand*{\IR}{\symbb{R}}
+\newcommand*{\IS}{\symbb{S}}
+\newcommand*{\IT}{\symbb{T}}
+\newcommand*{\IV}{\symbb{V}}
+\newcommand*{\IX}{\symbb{X}}
+\newcommand*{\IZ}{\symbb{Z}}
 
 % Basic Diacritica
-\newcommand*{\ol}{\overline}
-\newcommand*{\ti}{\tilde}
-\newcommand*{\ul}{\underline}
-\newcommand*{\wh}{\widehat}
-\newcommand*{\wt}{\widetilde}
+\newcommand*{\ol}[1]{\overline{#1}}
+\newcommand*{\ti}[1]{\tilde{#1}}
+\newcommand*{\ul}[1]{\underline{#1}}
+\newcommand*{\wh}[1]{\widehat{#1}}
+\newcommand*{\wt}[1]{\widetilde{#1}}
 
 % cdot-indicated arguments
 \newcommand*{\ArgRaw}[1]{{\,\cdot_{#1}\,}}
@@ -122,10 +112,10 @@
 \newcommand*{\im}{\imath}
 \newcommand*{\jm}{\jmath}
 \newcommand*{\id}{{\mathrm{id}}}
-\newcommand*{\MSE}{\mathbb {MSE}}
+\newcommand*{\MSE}{\symbb{MSE}}
 \newcommand*{\n}{\circ}
-\newcommand*{\One}{{\mathbb 1}}
-\newcommand*{\Two}{\bm 2}
+\newcommand*{\One}{\symbb{1}}
+\newcommand*{\Two}{\symbb{2}}
 \newcommand*{\pn}{\vartriangleright}
 \newcommand*{\psn}{\blacktriangleright}
 % \newcommand*{\pssn}{!!! Overlay symbol, see below !!!}
@@ -140,8 +130,8 @@
 \newcommand*{\wo}[1]{\backslash \{#1\}}
 \newcommand*{\diff}[1]{\frac{\mr d}{\mr d #1}}
 \newcommand*{\del}[2]{\frac{\partial #1} {\partial #2}}
-\newcommand*{\grkone}[2]{\mathfrak t_{#1, #2}}
-\newcommand*{\prkone}[1]{\mathfrak t_{#1}}
+\newcommand*{\grkone}[2]{\symfrak{t}_{#1, #2}}
+\newcommand*{\prkone}[1]{\symfrak{t}_{#1}}
 \newcommand*{\tens}[2]{#1 \otimes \cdots \otimes #2}
 
 % Quantifiers
@@ -285,7 +275,7 @@
 
 % Text Prefixes Involving Math Symbols
 \newcommand*{\textsigma}{\ensuremath{\othersigma}}
-% \newcommand*{\textstar}{\ensuremath{{}^*}}
+\providecommand*{\textstar}{}
 \renewcommand*{\textstar}{\ensuremath{{}^*}}
 \newcommand*{\Cstar}{\ensuremath{\mathrm{C}^*}}
 \newcommand*{\weakstar}{\ensuremath{\text{weak}^*}}
@@ -384,7 +374,7 @@
                     }}}
         }}
 
-\newcommand*{\debar}{{\,\OneOverlay{\mathrm d}{\mathchar'25}{-5.5}{0.75}{0.75}{0.60}{0.425}}}
+\newcommand*{\debar}{{\,\symup{đ}}}
 
 \newcommand*{\pssn}{{\OneOverlay{\vartriangleright}{\cdot}{3.5}{0}{0}{0}{0}}}
 \newcommand*{\ssn}{{\OneOverlay{\circ}{\cdot}{0}{0}{0}{0}{0}}}
@@ -408,15 +398,15 @@
 \newcommand*{\AlignMarginalReason}[1]{\AlignMarginalReasonDelimiter[\big]{\text{\space#1}}}
 
 % Landau's (big) O and (small) o – actually, Landau's Omicrons …
-\newcommand*{\Omicron}{{\mathcal O}}
+\newcommand*{\Omicron}{\symcal{O}}
 \newcommand*{\omicron}{{{%
                     \mathchoice
                     % \displaystyle
-                    {{\scriptstyle\mathcal{O}}}
+                    {{\scriptstyle\symcal{O}}}
                     % \textstyle
-                    {{\scriptstyle\mathcal{O}}}
+                    {{\scriptstyle\symcal{O}}}
                     % \scriptstyle
-                    {{\scriptscriptstyle\mathcal{O}}}
+                    {{\scriptscriptstyle\symcal{O}}}
                     % \scriptscriptstyle
-                    {\scalebox{.7}{$\scriptscriptstyle\mathcal{O}$}}
+                    {\scalebox{.7}{$\scriptscriptstyle\symcal{O}$}}
                 }}}
